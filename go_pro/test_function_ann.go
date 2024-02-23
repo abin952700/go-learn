@@ -7,11 +7,11 @@ import "fmt"
 //func (参数列表)(返回值)
 
 func t1() {
-	name := "tom"
-	age := 20
-	func() string {
-
-	}
+	//name := "tom"
+	//age := 20
+	//func() string {
+	//
+	//}
 }
 
 func main() {
