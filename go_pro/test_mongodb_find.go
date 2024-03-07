@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -31,21 +32,23 @@ func initDb2() {
 }
 
 func find() {
-	//ctx := context.TODO()
-	//// 关闭数据库
-	//defer client.Disconnect(ctx)
-	//client2.Database("go_db").Collection("Student")
-	//c2, err := client2.Find(ctx, bson.D{})
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//defer c2.close(ctx)
-	//for c2.Next(ctx) {
-	//	var result bson.D
-	//	c2.Decode(&result)
-	//}
+	ctx := context.TODO()
+	// 关闭数据库
+	defer client2.Disconnect(ctx)
+	client2.Database("go_db").Collection("Student")
+	c2, err := client2.Find(ctx, bson.D{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer c2.Close(ctx)
+	for c2.Next(ctx) {
+		var result bson.D
+		c2.Decode(&result)
+		fmt.Printf("result: %v\n", result)
+		fmt.Printf("result: %v\n", result.Map())
+	}
 }
 
 func main() {
-
+	find()
 }
