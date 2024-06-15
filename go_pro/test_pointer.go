@@ -43,4 +43,20 @@ func main() {
 	fmt.Printf("bp: %v\n", bp)
 	fmt.Printf("bp: %v\n", *bp)
 
+	//var p *string
+	//fmt.Println(p)
+	//fmt.Printf("p的值是%s/n", p)
+	//if p != nil {
+	//	fmt.Println("非空")
+	//} else {
+	//	fmt.Println("空值")
+	//}
+
+	var a int
+	fmt.Println(&a)
+	var p *int
+	p = &a
+	*p = 20
+	fmt.Println(a)
+
 }

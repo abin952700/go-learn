@@ -12,7 +12,8 @@ MongoDB中的JSON文档存储在名为BSON(二进制编码的JSON)的二进制�
 连接MongoDB的Go驱动程序中有两大类型表示BSON数据：D和Raw
 
 类型D家族被用来简洁地构建使用本地Go类型的BSON对象。这对于构造传递给MongoDB的命令特别有用。D家族包括四类：
- D: 一个BSON文档。这种类型应该在顺序重要的情况下使用，比如MongoDB命令。
+ D: 一个BSON文档。这种
+类型应该在顺序重要的情况下使用，比如MongoDB命令。
  M： 一张无序的map。它和D是一样的，只是它不保持顺序。
  A: 一个BSON数据。
  E: D里面的一个元素。

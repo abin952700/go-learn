@@ -27,6 +27,25 @@ func v1() {
 	fmt.Println("end...")
 }
 
+type Test struct {
+	name string
+}
+
+func (t *Test) Close() {
+	fmt.Println(t.name, "closed")
+}
+
+func Close(t Test) {
+	t.Close()
+}
+
 func main() {
 	v1()
+	ts := []Test{{"a"}, {"b"}, {"c"}}
+	//for _, t := range ts {
+	//	defer t.Close()
+	//}
+	for _, t := range ts {
+		defer Close(t)
+	}
 }

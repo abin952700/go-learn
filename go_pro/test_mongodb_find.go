@@ -34,13 +34,24 @@ func initDb2() {
 func find() {
 	ctx := context.TODO()
 	// 关闭数据库
-	defer client2.Disconnect(ctx)
-	client2.Database("go_db").Collection("Student")
-	c2, err := client2.Find(ctx, bson.D{})
+	defer func(client2 *mongo.Client, ctx context.Context) {
+		err := client2.Disconnect(ctx)
+		if err != nil {
+			fmt.Printf("%v 连接错误", err)
+		}
+	}(client2, ctx)
+	c := client2.Database("go_db").Collection("Student")
+	c2, err := c.Find(ctx, bson.D{})
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer c2.Close(ctx)
+	defer func(c2 *mongo.Cursor, ctx context.Context) {
+		err := c2.Close(ctx)
+		if err != nil {
+			fmt.Printf("%v 关闭错误", err)
+		}
+	}(c2, ctx)
+
 	for c2.Next(ctx) {
 		var result bson.D
 		c2.Decode(&result)
@@ -50,5 +61,6 @@ func find() {
 }
 
 func main() {
+	initDb2()
 	find()
 }
