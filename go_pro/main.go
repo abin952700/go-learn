@@ -69,6 +69,13 @@ func main() {
 	fmt.Printf("age: %v\n", age)
 }
 
+/*
+1.go mod init 项目名称
+2.配置第三方包
+3.go mod tidy 下载依赖
+4.运行项目
+*/
+
 // 匿名变量
 func getNameAndAge() (name string, age int) {
 	return "tom", 20
