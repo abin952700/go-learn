@@ -37,9 +37,16 @@ func (p Camera) run() {
 type Computer struct {
 }
 
+//非空接口
 func (c Computer) work(usb Usber) {
-	usb.start()
-	usb.stop()
+	//要判断usb的类型
+
+	if _, ok := usb.(Phone); ok { //类型断言
+		usb.start()
+	} else {
+		usb.stop()
+	}
+
 }
 
 func main() {
@@ -59,4 +66,5 @@ func main() {
 
 	var computer = Computer{}
 	computer.work(p)
+	computer.work(c)
 }
